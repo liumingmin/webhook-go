@@ -75,7 +75,7 @@ func hook(owner string, projectName string, branch string, pwd string) string {
 	}
 
 	//filePwd := fmt.Sprint(fileJSON["password"])
-	filePath := fmt.Sprint(fileJSON["path"])
+	workspace := fmt.Sprint(fileJSON["path"])
 
 	// 校验密码
 	//if pwd != `` {
@@ -87,10 +87,10 @@ func hook(owner string, projectName string, branch string, pwd string) string {
 
 	var cmd *exec.Cmd
 	if runtime.GOOS == "windows" {
-		cmd = exec.Command(`./git.bat `, filePath, branch)
+		cmd = exec.Command(`./git.bat `, workspace, branch)
 	} else {
 		// 执行Shell 命令
-		c := `./git.sh ` + filePath + ` ` + branch
+		c := `./git.sh ` + workspace + ` ` + branch
 		cmd = exec.Command("sh", "-c", c)
 	}
 
